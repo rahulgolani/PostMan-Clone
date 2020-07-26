@@ -57,15 +57,23 @@ addParam.addEventListener('click', () => {
   console.log(paramElement);
   newParams.appendChild(paramElement);
 
-  let deleteParams = document.getElementsByClassName('deleteParam');
-  for (item of deleteParams) {
-    item.addEventListener('click', (e) => {
-      // addedParamCount -= 1;
-      //e is the event
-      //e.target gives where the click is made
-      //e.target.paramElement gives the div which we want to remove
+  paramElement.addEventListener('click', (e) => {
+    let flag = confirm("Press OK to remove parameter");
+    if (flag) {
       e.target.parentElement.remove();
-    })
-  }
+    }
+
+  });
+  //adding event listener to - button
+  // let deleteParams = document.getElementsByClassName('deleteParam');
+  // for (item of deleteParams) {
+  //   item.addEventListener('click', (e) => {
+  //     // addedParamCount -= 1;
+  //     //e is the event
+  //     //e.target gives where the click is made
+  //     //e.target.paramElement gives the div which we want to remove
+  //     e.target.parentElement.remove();
+  //   })
+  // }
 
 })
