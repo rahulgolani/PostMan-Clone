@@ -8,8 +8,13 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="css\prism.css">
   <title>PostBoy</title>
+  <style media="screen">
+    #responsePre {
+      max-height: 500px;
+    }
+  </style>
 </head>
 
 <body>
@@ -37,12 +42,12 @@
     <h1 class="my-3">PostBoy At Your Service!</h1>
   </div>
 
-  <div class="container my-5">
+  <div class="container my-4">
     <form>
       <!-- URL -->
       <div class="form-group row">
         <label for="urlField" class="col-sm-2 col-form-label">URL</label>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
           <input type="text" class="form-control" id="urlField" placeholder="Enter URL Here">
         </div>
       </div>
@@ -51,7 +56,7 @@
       <fieldset class="form-group">
         <div class="row">
           <legend class="col-form-label col-sm-2 pt-0">Request Type</legend>
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="requestType" id="get" value="GET" checked>
               <label class="form-check-label" for="get">
@@ -72,7 +77,7 @@
       <fieldset class="form-group">
         <div class="row">
           <legend class="col-form-label col-sm-2 pt-0">Content Type</legend>
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="contentType" id="json" value="json" checked>
               <label class="form-check-label" for="json">
@@ -101,17 +106,17 @@
           </div>
           <button id="addParams" class="btn btn-primary">+</button>
         </div>
+        <div id="newParams">
+        </div>
       </div>
 
-      <div id="newParams">
 
-      </div>
 
       <!-- JSON CONTENT BOX -->
       <div class="my-3" id="jsonBox">
         <div class="form-group row">
           <label for="jsonFieldBox" class="col-sm-2 col-form-label">JSON Content</label>
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <textarea class="form-control" id="jsonFieldBox" rows="3" placeholder="JSON Content"></textarea>
           </div>
         </div>
@@ -119,7 +124,7 @@
 
       <!-- SUBMIT BUTTON WHICH WILL TRIGGER FETCHAPI -->
       <div class="form-group row">
-        <div class="col-sm-10">
+        <div class="col-sm-8">
           <button id="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
@@ -129,8 +134,13 @@
       <div class="my-3" id="responseJsonBox">
         <div class="form-group row">
           <label for="responseBox" class="col-sm-2 col-form-label">Response</label>
-          <div class="col-sm-10">
-            <textarea class="form-control" id="responseBox" rows="3" placeholder="JSON Response"></textarea>
+          <div class="col-sm-8">
+            <!-- <textarea class="form-control" id="responseBox" rows="3" placeholder="JSON Response"></textarea> -->
+            <pre id='responsePre' class="language-javascript">
+              <code id="responsePrism" class="language-javascript" >
+
+              </code>
+            </pre>
           </div>
         </div>
       </div>
@@ -146,5 +156,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 <script src="js\main.js"></script>
+<script src="js\prism.js"></script>
 
 </html>

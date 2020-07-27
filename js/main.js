@@ -1,5 +1,5 @@
 console.log("postman clone");
-
+//fLehGQotgcMvU5o7z4DYbXCi0qE2
 //UTILITY FUNCTIONS
 
 // 1) get the DOM element from the string
@@ -38,7 +38,8 @@ let addedParamCount = 1;
 let addParam = document.getElementById('addParams');
 
 //on clicking + parameter, user should get the option to add the parameter and its value
-addParam.addEventListener('click', () => {
+addParam.addEventListener('click', (e) => {
+  e.preventDefault();
   addedParamCount += 1;
   let newPparams = document.getElementById('newParams');
 
@@ -57,23 +58,83 @@ addParam.addEventListener('click', () => {
   console.log(paramElement);
   newParams.appendChild(paramElement);
 
-  paramElement.addEventListener('click', (e) => {
-    let flag = confirm("Press OK to remove parameter");
-    if (flag) {
-      e.target.parentElement.remove();
-    }
-
-  });
-  //adding event listener to - button
-  // let deleteParams = document.getElementsByClassName('deleteParam');
-  // for (item of deleteParams) {
-  //   item.addEventListener('click', (e) => {
-  //     // addedParamCount -= 1;
-  //     //e is the event
-  //     //e.target gives where the click is made
-  //     //e.target.paramElement gives the div which we want to remove
+  // paramElement.addEventListener('click', (e) => {
+  //   let flag = confirm("Press OK to remove parameter");
+  //   if (flag) {
   //     e.target.parentElement.remove();
-  //   })
-  // }
+  //   }
+  //
+  // });
+  //adding event listener to - button
+  let deleteParams = document.getElementsByClassName('deleteParam');
+  for (item of deleteParams) {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      // addedParamCount -= 1;
+      //e is the event
+      //e.target gives where the click is made
+      //e.target.paramElement gives the div which we want to remove
+      e.target.parentElement.remove();
+    })
+  }
+})
 
+
+//onSubmit
+let submit = document.getElementById('submit');
+submit.addEventListener('click', (e) => {
+  e.preventDefault();
+  //add a wait message in the response box
+  // document.getElementById('responseBox').value = "Please Wait...";
+  document.getElementById('responsePrism').innerHTML = "Please Wait...";
+
+  let url = document.getElementById('urlField').value;
+  let requestType = document.querySelector("input[name='requestType']:checked").value;
+  let contentType = document.querySelector("input[name='contentType']:checked").value;
+
+  if (contentType == 'params') {
+    data = {};
+    for (let i = 1; i <= addedParamCount; i++) {
+      if (document.getElementById('parameterKey' + i) != undefined) {
+        let key = document.getElementById('parameterKey' + i).value;
+        let value = document.getElementById('parameterValue' + i).value;
+        data[key] = value;
+      }
+    }
+    data = JSON.stringify(data)
+    console.log(data);
+  } else {
+    data = document.getElementById('jsonFieldBox').value;
+    console.log(data);
+  }
+  console.log(url);
+  console.log(requestType);
+  console.log(contentType);
+  console.log(data);
+
+  // https://jsonplaceholder.typicode.com/
+  // https://randomuser.me/api/
+
+  if (requestType == 'GET') {
+    fetch(url, {
+      method: 'GET',
+    }).then((response) => response.text()).then(text => {
+      // console.log(json);
+      // document.getElementById('responseBox').value = text;
+      document.getElementById('responsePrism').innerHTML = text;
+      Prism.highlightAll();
+    })
+  } else {
+    fetch(url, {
+      method: 'POST',
+      body: data,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }).then((response) => response.text()).then(text => {
+      // document.getElementById('responseBox').value = text;
+      document.getElementById('responsePrism').innerHTML = text;
+      Prism.highlightAll();
+    })
+  }
 })
