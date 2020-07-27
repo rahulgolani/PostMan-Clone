@@ -13,6 +13,14 @@
   <style media="screen">
     #responsePre {
       max-height: 500px;
+      max-width: 1000px;
+      /* word-wrap: break-word; */
+      white-space: pre-wrap;
+    }
+
+    #responsePrism {
+      /* word-wrap: break-word; */
+      white-space: pre-line;
     }
   </style>
 </head>
@@ -137,7 +145,7 @@
           <div class="col-sm-8">
             <!-- <textarea class="form-control" id="responseBox" rows="3" placeholder="JSON Response"></textarea> -->
             <pre id='responsePre' class="language-javascript">
-              <code id="responsePrism" class="language-javascript" >
+              <code id="responsePrism" class="language-javascript">
 
               </code>
             </pre>

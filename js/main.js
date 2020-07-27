@@ -9,6 +9,14 @@ function getElement(html) {
   return div.firstElementChild;
 }
 
+// 2) get the DOM element for the output response
+function getResponseElement(text) {
+  let div = document.createElement('div');
+  div.innerHTML = text;
+  console.log(div);
+  return div;
+}
+
 
 //since the default value is json, so onload of the page the parameterbox should not display
 let parameterBox = document.getElementById('parameterBox');
@@ -116,12 +124,31 @@ submit.addEventListener('click', (e) => {
   // https://randomuser.me/api/
 
   if (requestType == 'GET') {
+    if (contentType == "params") {
+      parameters = JSON.parse(data)
+      let totalKeys = Object.keys(parameters).length;
+      let countKeys = 0;
+      for (key in parameters) {
+        if (countKeys == 0) {
+          url += '?';
+        }
+        console.log(key, parameters[key]);
+        url += `${key}=${parameters[key]}`;
+        countKeys += 1;
+        if (countKeys < totalKeys) {
+          url += '&';
+        }
+      }
+      console.log(url);
+    }
     fetch(url, {
       method: 'GET',
     }).then((response) => response.text()).then(text => {
       // console.log(json);
       // document.getElementById('responseBox').value = text;
       document.getElementById('responsePrism').innerHTML = text;
+      // let responseElement = getResponseElement(text);
+      // document.getElementById('responsePrism').innerHTML = responseElement;
       Prism.highlightAll();
     })
   } else {
